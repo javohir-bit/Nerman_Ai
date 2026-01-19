@@ -1,0 +1,422 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% block extra_css %}
+<!-- Chat specific styles are now in style.css -->
+{% endblock %}
+
+<div class="chat-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <form method="post" action="{% url 'create_chat' %}">
+                {% csrf_token %}
+                <button class="new-chat-btn">
+                    <span style="font-size: 1.25rem;">+</span>
+                    Новый чат
+                </button>
+            </form>
+        </div>
+
+        <div class="chat-list">
+            <div class="chat-list-title">ВАШИ ЧАТЫ</div>
+            {% for chat in chats %}
+            <a href="?chat={{ chat.id }}"
+                class="chat-item {% if active_chat and active_chat.id == chat.id %}active{% endif %}">
+                <div style="font-size: 1.25rem;">✏️</div>
+                <div class="chat-item-content">
+                    <div class="chat-item-title">{{ chat.title }}</div>
+                    <div class="chat-item-meta">{{ chat.messages.count }} сообщений</div>
+                </div>
+                <div class="chat-actions">
+                    <button class="chat-action-btn"
+                        onclick="shareChat(event, '{{ chat.id }}', '{{ chat.title }}')">📤</button>
+                </div>
+            </a>
+            {% empty %}
+            <div style="color: #888; font-size: 0.875rem; text-align: center; padding: 2rem 1rem;">
+                Нет чатов.<br>Создайте новый!
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="chat-area">
+        {% if active_chat %}
+        <div class="messages-container" id="messages">
+            {% if active_chat.messages.count > 0 %}
+            {% for msg in active_chat.messages.all %}
+            <div class="message {{ msg.role }}">
+                <div class="message-content">{{ msg.content }}</div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <!-- Empty chat state -->
+            <div
+                style="flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; color: #888;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">💬</div>
+                <p>Этот чат пуст. Начните разговор ниже!</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="input-area">
+            <form id="chatForm" class="input-form" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="chat_id" value="{{ active_chat.id }}">
+                <input type="hidden" name="type" id="msgType" value="text">
+
+                <div style="margin-right: 10px;">
+                    <select id="modeSelector" class="mode-select-input" onchange="changeMode(this.value)">
+                        <option value="text">💬 Chat</option>
+                        <option value="image">🎨 Rasm</option>
+                    </select>
+                </div>
+
+                <input type="text" name="message" id="messageInput" class="input-field" placeholder="Задайте вопрос..."
+                    required autocomplete="off">
+                <button type="submit" class="send-btn">Отправить</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-state-icon">💬</div>
+            <h2 class="empty-state-title">Что сегодня поищем?</h2>
+            <p class="empty-state-text">Создайте новый чат, чтобы начать работу с AI</p>
+
+            <!-- Trending Instagram Songs -->
+            <div class="trending-section">
+                <div class="trending-title">
+                    <span>🎵</span>
+                    <span>Trending в Instagram</span>
+                </div>
+                <ul class="trending-list">
+                    <li class="trending-item">
+                        <div class="trending-number">1</div>
+                        <div class="trending-info">
+                            <div class="trending-song">Fortnight</div>
+                            <div class="trending-artist">Taylor Swift ft. Post Malone</div>
+                        </div>
+                    </li>
+                    <li class="trending-item">
+                        <div class="trending-number">2</div>
+                        <div class="trending-info">
+                            <div class="trending-song">Espresso</div>
+                            <div class="trending-artist">Sabrina Carpenter</div>
+                        </div>
+                    </li>
+                    <li class="trending-item">
+                        <div class="trending-number">3</div>
+                        <div class="trending-info">
+                            <div class="trending-song">Beautiful Things</div>
+                            <div class="trending-artist">Benson Boone</div>
+                        </div>
+                    </li>
+                    <li class="trending-item">
+                        <div class="trending-number">4</div>
+                        <div class="trending-info">
+                            <div class="trending-song">Too Sweet</div>
+                            <div class="trending-artist">Hozier</div>
+                        </div>
+                    </li>
+                    <li class="trending-item">
+                        <div class="trending-number">5</div>
+                        <div class="trending-info">
+                            <div class="trending-song">Lose Control</div>
+                            <div class="trending-artist">Teddy Swims</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+</div>
+
+<!-- Share Modal -->
+<div class="modal" id="shareModal">
+    <div class="modal-content">
+        <div class="modal-header">Поделиться чатом</div>
+        <div class="share-link">
+            <input type="text" id="shareLink" readonly>
+            <button class="copy-btn" onclick="copyShareLink()">Копировать</button>
+        </div>
+        <p style="color: #888; font-size: 0.875rem; margin-bottom: 1rem;">
+            Скопируйте эту ссылку и поделитесь с друзьями
+        </p>
+        <button class="close-modal" onclick="closeShareModal()">Закрыть</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    let currentChatId = null;
+
+    // ============================================
+    // CSRF TOKEN HANDLING (Django Standard Method)
+    // ============================================
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function getCSRFToken() {
+        // Try to get from cookie first (preferred method)
+        let token = getCookie('csrftoken');
+
+        // Fallback to form field if cookie not available
+        if (!token) {
+            const tokenField = document.querySelector('[name=csrfmiddlewaretoken]');
+            if (tokenField) {
+                token = tokenField.value;
+            }
+        }
+
+        return token;
+    }
+
+    // ============================================
+    // SHARE MODAL FUNCTIONS
+    // ============================================
+    function shareChat(event, chatId, chatTitle) {
+        event.preventDefault();
+        event.stopPropagation();
+        currentChatId = chatId;
+
+        const shareUrl = window.location.origin + '/dashboard/ai-tasks/?chat=' + chatId;
+        document.getElementById('shareLink').value = shareUrl;
+        document.getElementById('shareModal').classList.add('active');
+    }
+
+    function closeShareModal() {
+        document.getElementById('shareModal').classList.remove('active');
+    }
+
+    function copyShareLink() {
+        const shareLink = document.getElementById('shareLink');
+        shareLink.select();
+        document.execCommand('copy');
+
+        const btn = event.target;
+        btn.textContent = 'Скопировано! ✓';
+        setTimeout(() => {
+            btn.textContent = 'Копировать';
+        }, 2000);
+    }
+
+    // Close modal on outside click
+    document.getElementById('shareModal').addEventListener('click', function (e) {
+        if (e.target === this) {
+            closeShareModal();
+        }
+    });
+
+    // ============================================
+    // CHAT FUNCTIONALITY
+    // ============================================
+    $(document).ready(function () {
+        // Render Markdown content (images) in history
+        renderMarkdown();
+
+        // Auto-scroll to bottom on load
+        var messagesContainer = $('#messages');
+        if (messagesContainer.length) {
+            messagesContainer.scrollTop(messagesContainer[0].scrollHeight);
+        }
+
+        $('#chatForm').on('submit', function (e) {
+            e.preventDefault();
+
+            var messageText = $('#messageInput').val().trim();
+            if (!messageText) return;
+
+            // Get CSRF token
+            var csrfToken = getCSRFToken();
+            if (!csrfToken) {
+                console.error('CSRF token not found');
+                alert('❌ Xatolik: CSRF token topilmadi. Sahifani yangilang.');
+                return;
+            }
+
+            // Prepare form data
+            var chatId = $('input[name="chat_id"]').val();
+            var msgType = $('#msgType').val(); // Get selected type
+
+            var formData = {
+                'chat_id': chatId,
+                'message': messageText,
+                'type': msgType
+            };
+
+            // Add user message to UI immediately
+            $('#messages').append(`
+                <div class="message user">
+                    <div class="message-content">
+                        ${msgType === 'image' ? '🎨 ' : ''}${escapeHtml(messageText)}
+                    </div>
+                </div>
+            `);
+
+            $('#messageInput').val('');
+
+            // Show loading indicator
+            $('#messages').append(`
+                <div class="message assistant" id="loading">
+                    <div class="message-content">
+                        <span style="opacity: 0.6;">Думаю...</span>
+                    </div>
+                </div>
+            `);
+
+            // Auto-scroll
+            $('#messages').scrollTop($('#messages')[0].scrollHeight);
+
+            // Send POST request via AJAX
+            $.ajax({
+                url: '{% url "send_message" %}',
+                method: 'POST',
+                data: formData,
+                headers: {
+                    'X-CSRFToken': csrfToken
+                },
+                success: function (data) {
+                    $('#loading').remove();
+
+                    // Check if response indicates an error
+                    if (data.success === false || data.error) {
+                        $('#messages').append(`
+                            <div class="message assistant">
+                                <div class="message-content" style="color: #ff6b6b;">
+                                    ${escapeHtml(data.response || data.error)}
+                                </div>
+                            </div>
+                        `);
+                    } else {
+                        // Success - add AI response
+                        let contentHtml = '';
+                        if (data.is_image) {
+                            contentHtml = `<img src="${data.image_url}" alt="Generated Image" style="max-width: 100%; border-radius: 10px; margin-top: 10px;">`;
+                            // Add prompt text if needed, or just the image
+                        } else {
+                            contentHtml = escapeHtml(data.response);
+                        }
+
+                        $('#messages').append(`
+                            <div class="message assistant">
+                                <div class="message-content">${contentHtml}</div>
+                            </div>
+                        `);
+
+                        // Show token usage if available
+                        if (data.tokens_used && data.remaining_tokens !== undefined) {
+                            console.log(`Tokens used: ${data.tokens_used}, Remaining: ${data.remaining_tokens}`);
+                        }
+                    }
+
+                    $('#messages').scrollTop($('#messages')[0].scrollHeight);
+
+                    // Reload page to update chat title if this is the first message
+                    if ($('#messages .message').length <= 2) {
+                        setTimeout(() => {
+                            location.reload();
+                        }, 500);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    $('#loading').remove();
+
+                    let errorMsg = '❌ Xatolik yuz berdi';
+                    let errorDetails = '';
+
+                    // Parse error response
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        errorMsg = response.error || response.message || errorMsg;
+                    } catch (e) {
+                        // Could not parse JSON, use status text
+                        if (xhr.status === 403) {
+                            errorMsg = '❌ CSRF xatosi: Sahifani yangilang va qayta urinib ko\'ring';
+                        } else if (xhr.status === 500) {
+                            errorMsg = '❌ Server xatosi: Administrator bilan bog\'laning';
+                        } else if (xhr.status === 0) {
+                            errorMsg = '❌ Tarmoq xatosi: Internet ulanishini tekshiring';
+                        } else {
+                            errorMsg = `❌ Xatolik (${xhr.status}): ${xhr.statusText}`;
+                        }
+                    }
+
+                    $('#messages').append(`
+                        <div class="message assistant">
+                            <div class="message-content" style="color: #ff6b6b;">
+                                ${escapeHtml(errorMsg)}
+                            </div>
+                        </div>
+                    `);
+                    $('#messages').scrollTop($('#messages')[0].scrollHeight);
+
+                    // Log error for debugging
+                    console.error('Chat error:', {
+                        status: xhr.status,
+                        statusText: xhr.statusText,
+                        response: xhr.responseText,
+                        error: error
+                    });
+                }
+            });
+        });
+
+        // Focus input on load
+        $('#messageInput').focus();
+    });
+
+    function changeMode(mode) {
+        $('#msgType').val(mode);
+        const input = $('#messageInput');
+        if (mode === 'image') {
+            input.attr('placeholder', 'Rasm chizish uchun tariflang (English)...');
+        } else {
+            input.attr('placeholder', 'Savolingizni yozing...');
+        }
+    }
+
+    // ============================================
+    // UTILITY FUNCTIONS
+    // ============================================
+    function renderMarkdown() {
+        $('.message-content').each(function () {
+            var content = $(this).text(); // Use text() to safely get raw content
+            // Check for image markdown: ![alt](url)
+            if (content.includes('![') && content.includes('](')) {
+                // Simple regex for markdown images
+                var newContent = content.replace(/!\[(.*?)\]\((.*?)\)/g, function (match, alt, url) {
+                    return `<img src="${url}" alt="${alt}" style="max-width: 100%; border-radius: 10px; margin-top: 10px; margin-bottom: 10px;">`;
+                });
+
+                // Replace newlines with <br> for the rest of the text
+                newContent = newContent.replace(/\n/g, '<br>');
+
+                $(this).html(newContent);
+            }
+        });
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+</script>
+{% endblock %}

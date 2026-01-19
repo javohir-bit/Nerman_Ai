@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<!-- Hero Section -->
+<section class="relative overflow-hidden py-20 md:py-32">
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 text-[#157BFF] font-orbitron leading-tight">
+                    Ваш AI-Видеоредактор для создания видео
+                </h1>
+                <p class="text-lg md:text-xl text-slate-600 mb-8 leading-relaxed">
+                    Монтаж без усилий с Nerman.ai — опиши идею, и ИИ создаст видео: Reels, Shorts, подкасты. Экономь
+                    время,
+                    автоматизируй рутину.
+                </p>
+                <div>
+                    <a href="{% url 'register' %}"
+                        class="inline-block px-8 py-4 text-lg font-bold text-white rounded-full transition-all hover:scale-105 shadow-lg hover:shadow-xl bg-gradient-to-r from-[#157BFF] to-[#15488B]">
+                        Создать проект
+                    </a>
+                </div>
+            </div>
+            <div class="relative flex justify-center items-end">
+                <img src="{% static 'img/hero_phone_mrbeast_small.png' %}" alt="App Dashboard Small"
+                    class="h-[400px] w-auto object-contain relative z-30 -mr-24 mb-4 drop-shadow-xl transform -rotate-3 hover:scale-105 transition-all duration-300">
+                <img src="{% static 'img/hero_phone_mrbeast_new.png' %}" alt="App Dashboard"
+                    class="h-[500px] w-auto object-contain relative z-20 drop-shadow-2xl">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Company Logos Marquee -->
+<!-- Company Logos Marquee -->
+<section class="py-12 bg-transparent overflow-hidden border-b border-slate-100">
+
+
+    <!-- Marquee Container with "group" for hover effects -->
+    <div class="relative w-full overflow-hidden group">
+        <!-- Scrolling Wrapper -->
+        <div class="flex w-[200%] animate-marquee group-hover:[animation-play-state:paused]">
+
+            <!-- Logo Set 1 -->
+            <div class="flex items-center justify-around w-1/2 px-4 gap-8">
+                <img src="{% static 'img/logos/google.png' %}" alt="Google"
+                    class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+
+                <img src="{% static 'img/logos/microsoft.png' %}" alt="Microsoft"
+                    class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+
+                <img src="{% static 'img/logos/spotify.png' %}" alt="Spotify"
+                    class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+
+                <!-- Placeholders for failed downloads -->
+                <img src="{% static 'img/logos/tesla.png' %}" alt="Tesla"
+                    class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+
+                <img src="{% static 'img/logos/apple.png' %}" alt="Apple"
+                    class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+            </div>
+
+            <!-- Logo Set 2 (Duplicate for loop) -->
+            <div class="flex items-center justify-around w-1/2 px-4 gap-8">
+                <img src="{% static 'img/logos/google.png' %}" alt="Google"
+                    class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+
+                <img src="{% static 'img/logos/microsoft.png' %}" alt="Microsoft"
+                    class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+
+                <img src="{% static 'img/logos/spotify.png' %}" alt="Spotify"
+                    class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+
+                <!-- Placeholders for failed downloads -->
+                <img src="{% static 'img/logos/tesla.png' %}" alt="Tesla"
+                    class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+
+                <img src="{% static 'img/logos/apple.png' %}" alt="Apple"
+                    class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+            </div>
+        </div>
+    </div>
+    <style>
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-marquee {
+            animation: marquee 30s linear infinite;
+        }
+    </style>
+</section>
+
+<!-- Features / Product Section -->
+<section id="product" class="py-20 bg-slate-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-16 text-slate-900">
+            Почему выбирают <span class="gradient-text font-orbitron">NERMAN.AI</span>
+        </h2>
+
+        <div class="flex justify-center">
+            <!-- Main Card -->
+            <div
+                class="w-full max-w-[1190px] min-h-[670px] bg-blue-50 rounded-[50px] p-8 md:p-16 relative overflow-hidden">
+                <!-- Background Decorative Blur -->
+                <div
+                    class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/50 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none">
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 md:gap-20 relative z-10">
+
+                    <!-- Left Column: Problems -->
+                    <div class="space-y-12">
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-[#157BFF] font-sans mb-12">Что вас Мучает
+                        </h2>
+
+                        <!-- Item 1 -->
+                        <div class="flex flex-col items-start gap-4">
+                            <i class="fa-solid fa-clock text-4xl text-slate-900"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2">Долгий процесс</h3>
+                                <p class="text-slate-600 leading-relaxed max-w-xs">В среднем видеомонтажёры тратят 2
+                                    часа на
+                                    создание одного ролика</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="flex flex-col items-start gap-4">
+                            <i class="fa-solid fa-layer-group text-4xl text-slate-900"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2">Многозадачность</h3>
+                                <ul class="text-slate-600 space-y-1 list-disc list-inside">
+                                    <li>Обрезка моментов</li>
+                                    <li>Зум</li>
+                                    <li>Переходы</li>
+                                    <li>Материалы</li>
+                                    <li>Стоковые ролики</li>
+                                    <li>Субтитры</li>
+                                    <li>Эффекты</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="flex flex-col items-start gap-4">
+                            <i class="fa-regular fa-user text-4xl text-slate-900"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2">Человеческий фактор</h3>
+                                <ul class="text-slate-600 space-y-1 list-disc list-inside">
+                                    <li>Занятость</li>
+                                    <li>Неуспевание</li>
+                                    <li>Границы работы</li>
+                                    <li>Нехватка энергии</li>
+                                    <li>Внешние факторы</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Solutions -->
+                    <div class="space-y-12">
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-[#157BFF] font-sans mb-12">Наше Решение</h2>
+
+                        <!-- Item 1 -->
+                        <div class="flex flex-col items-start gap-4">
+                            <i class="fa-solid fa-rocket text-4xl text-slate-900"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2">Быстрый процесс</h3>
+                                <p class="text-slate-600 leading-relaxed max-w-xs">Чтобы получить результат ролика
+                                    достаточно одной минуты</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="flex flex-col items-start gap-4">
+                            <i class="fa-solid fa-gear text-4xl text-slate-900"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2">Автоматизация</h3>
+                                <p class="text-slate-600 leading-relaxed max-w-xs">NERMAN.AI объединяет в себе все
+                                    функции
+                                    монтажёра, чем другие ИИ-видеоредакторы</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="flex flex-col items-start gap-4">
+                            <i class="fa-solid fa-bullseye text-4xl text-slate-900"></i>
+                            <div>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2">Совершенство</h3>
+                                <p class="text-slate-600 leading-relaxed mb-2">Совершенство в работе:</p>
+                                <ul class="text-slate-600 space-y-1 list-none">
+                                    <li>Без оправданий,</li>
+                                    <li>Без срывов,</li>
+                                    <li>Только концентрация.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
