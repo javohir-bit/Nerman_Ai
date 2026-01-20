@@ -47,3 +47,102 @@ msgstr "Ro'yxatdan o'tish"
 
 msgid "Видеоредактор"
 msgstr "Video Muharriri"
+
+msgid "Будущего"
+msgstr "Kelajagi"
+
+msgid "Создавайте профессиональный контент за считанные секунды с помощью передовых технологий NERMAN.AI. Наш ИИ возьмет на себя всю рутину."
+msgstr "NERMAN.AI ilg'or texnologiyalari yordamida bir necha soniya ichida professional kontent yarating. Bizning Sun'iy intellekt barcha tartibsiz ishlarni o'z zimmasiga oladi."
+
+msgid "Попробовать бесплатно"
+msgstr "Bepul sinab ko'rish"
+
+msgid "Как это работает"
+msgstr "Bu qanday ishlaydi"
+
+msgid "Процесс создания видео стал проще, чем когда-либо"
+msgstr "Video yaratish jarayoni har qachongidan ham osonlashdi"
+
+msgid "Анализ контента"
+msgstr "Kontent tahlili"
+
+msgid "ИИ анализирует ваши исходные материалы, определяя лучшие моменты и ключевые темы."
+msgstr "Sun'iy intellekt sizning manba materiallaringizni tahlil qilib, eng yaxshi lahzalar va asosiy mavzulari aniqlaydi."
+
+msgid "Умный монтаж"
+msgstr "Aqlli montaj"
+
+msgid "Автоматическая склейка, цветокоррекция и наложение эффектов в соответствии с выбранным стилем."
+msgstr "Tanlangan uslubga muvofiq avtomatik kesish, rangni tuzatish va effektlarni qo'llash."
+
+msgid "Готовый результат"
+msgstr "Tayyor natija"
+
+msgid "Экспортируйте видео в любом формате, оптимизированном для всех популярных социальных сетей."
+msgstr "Videoni barcha ommabop ijtimoiy tarmoqlar uchun optimallashtirilgan istalgan formatda eksport qiling."
+
+msgid "Достигайте новых"
+msgstr "Yangi"
+
+msgid "вершин"
+msgstr "cho'qqilarga erishing"
+
+msgid "Кинематографичное качество"
+msgstr "Kinematografik sifat"
+
+msgid "Автоматическая стабилизация и улучшение разрешения до 4K."
+msgstr "Avtomatik barqarorlashtirish va ruxsatni 4K gacha oshirish."
+
+msgid "Синхронизация с музыкой"
+msgstr "Musiqa bilan sinxronizatsiya"
+
+msgid "Монтаж под бит любой аудиодорожки для максимальной динамики."
+msgstr "Maksimal dinamika uchun har qanday audio trekning bitiga mos ravishada montaj qilish."
+
+msgid "Умные субтитры"
+msgstr "Aqlli subtitrlar"
+
+msgid "Генерация стильных субтитров на 50+ языках с идеальным таймингом."
+msgstr "Ideal tayming bilan 50 dan ortiq tillarda zamonaviy subtitrlarni yaratish."
+
+msgid "Готовы изменить свой контент?"
+msgstr "Kontentingizni o'zgartirishga tayyormisiz?"
+
+msgid "Присоединяйтесь к тысячам креаторов, которые уже используют NERMAN.AI"
+msgstr "NERMAN.AI dan foydalanayotgan minglab ijodkorlarga qo'shiling"
+
+msgid "Начать сейчас"
+msgstr "Hozir boshlash"
+
+msgid "Как работает ваш ИИ-Видеоредактор"
+msgstr "Sizning Sun'iy intellektli video muharriringiz qanday ishlaydi"
+
+msgid "Загрузите ваши исходники"
+msgstr "Manba fayllaringizni yuklang"
+
+msgid "Просто перетащите ваши видеофайлы в наш редактор. Наш ИИ мгновенно проанализирует контент и подготовит его к обработке."
+msgstr "Shunchaki video fayllaringizni muharririmizga yuklang. Bizning sun'iy intellekt kontentni bir zumda tahlil qiladi va uni qayta ishlashga tayyorlaydi."
+
+msgid "ИИ находит лучшие моменты"
+msgstr "Sun'iy intellekt eng yaxshi lahzalarni topadi"
+
+msgid "Наши алгоритмы автоматически выделяют самые эмоциональные и важные части вашего видео, убирая лишнее."
+msgstr "Bizning algoritmlarimiz videongizning eng hissiyotli va muhim qismlarini avtomatik ravishda ajratib ko'rsatadi va keraksizlarini olib tashlaydi."
+
+msgid "Выберите стиль и темп"
+msgstr "Uslub va tempni tanlang"
+
+msgid "Выберите подходящий пресет: от динамичного TikTok до кинематографичного блога. ИИ подстроит монтаж под ваш выбор."
+msgstr "Mos keladigan presetni tanlang: dinamik TikTok-dan kinematografik bloggacha. Sun'iy intellekt montajni sizning tanlovingizga moslashtiradi."
+
+msgid "Автоматические эффекты и звук"
+msgstr "Avtomatik effektlar va ovoz"
+
+msgid "Система добавит подходящую музыку, субтитры и визуальные эффекты, синхронизированные с ритмом видео."
+msgstr "Tizim video ritmi bilan sinxronlashtirilgan mos musiqa, subtitrlar va vizual effektlarni qo'shadi."
+
+msgid "Готово к публикации!"
+msgstr "Nashrga tayyor!"
+
+msgid "Ваше идеальное видео готово. Скачайте его или мгновенно опубликуйте во все ваши соцсети."
+msgstr "Sizning mukammal videongiz tayyor. Uni yuklab oling yoki barcha ijtimoiy tarmoqlaringizga darhol nashr eting."

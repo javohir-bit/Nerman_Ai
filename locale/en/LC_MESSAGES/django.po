@@ -34,7 +34,7 @@ msgid "Блог"
 msgstr "Blog"
 
 msgid "Chat Support"
-msgstr "Chat Support"
+msgstr "Support"
 
 msgid "Войти"
 msgstr "Login"
@@ -47,3 +47,102 @@ msgstr "Register"
 
 msgid "Видеоредактор"
 msgstr "Video Editor"
+
+msgid "Будущего"
+msgstr "of the Future"
+
+msgid "Создавайте профессиональный контент за считанные секунды с помощью передовых технологий NERMAN.AI. Наш ИИ возьмет на себя всю рутину."
+msgstr "Create professional content in seconds with NERMAN.AI's advanced technology. Our AI takes care of all the routine."
+
+msgid "Попробовать бесплатно"
+msgstr "Try for free"
+
+msgid "Как это работает"
+msgstr "How it works"
+
+msgid "Процесс создания видео стал проще, чем когда-либо"
+msgstr "The video creation process has become easier than ever"
+
+msgid "Анализ контента"
+msgstr "Content Analysis"
+
+msgid "ИИ анализирует ваши исходные материалы, определяя лучшие моменты и ключевые темы."
+msgstr "AI analyzes your source materials, identifying the best moments and key themes."
+
+msgid "Умный монтаж"
+msgstr "Smart Editing"
+
+msgid "Автоматическая склейка, цветокоррекция и наложение эффектов в соответствии с выбранным стилем."
+msgstr "Automatic cutting, color correction and effect overlay according to the chosen style."
+
+msgid "Готовый результат"
+msgstr "Final Result"
+
+msgid "Экспортируйте видео в любом формате, оптимизированном для всех популярных социальных сетей."
+msgstr "Export video in any format, optimized for all popular social networks."
+
+msgid "Достигайте новых"
+msgstr "Reach new"
+
+msgid "вершин"
+msgstr "peaks"
+
+msgid "Кинематографичное качество"
+msgstr "Cinematic quality"
+
+msgid "Автоматическая стабилизация и улучшение разрешения до 4K."
+msgstr "Automatic stabilization and resolution improvement up to 4K."
+
+msgid "Синхронизация с музыкой"
+msgstr "Music synchronization"
+
+msgid "Монтаж под бит любой аудиодорожки для максимальной динамики."
+msgstr "Editing to the beat of any audio track for maximum dynamics."
+
+msgid "Умные субтитры"
+msgstr "Smart subtitles"
+
+msgid "Генерация стильных субтитров на 50+ языках с идеальным таймингом."
+msgstr "Generation of stylish subtitles in 50+ languages with perfect timing."
+
+msgid "Готовы изменить свой контент?"
+msgstr "Ready to change your content?"
+
+msgid "Присоединяйтесь к тысячам креаторов, которые уже используют NERMAN.AI"
+msgstr "Join thousands of creators who are already using NERMAN.AI"
+
+msgid "Начать сейчас"
+msgstr "Start now"
+
+msgid "Как работает ваш ИИ-Видеоредактор"
+msgstr "How your AI Video Editor works"
+
+msgid "Загрузите ваши исходники"
+msgstr "Upload your source files"
+
+msgid "Просто перетащите ваши видеофайлы в наш редактор. Наш ИИ мгновенно проанализирует контент и подготовит его к обработке."
+msgstr "Just drag and drop your video files into our editor. Our AI will instantly analyze the content and prepare it for processing."
+
+msgid "ИИ находит лучшие моменты"
+msgstr "AI finds the best moments"
+
+msgid "Наши алгоритмы автоматически выделяют самые эмоциональные и важные части вашего видео, убирая лишнее."
+msgstr "Our algorithms automatically highlight the most emotional and important parts of your video, removing the excess."
+
+msgid "Выберите стиль и темп"
+msgstr "Choose style and pace"
+
+msgid "Выберите подходящий пресет: от динамичного TikTok до кинематографичного блога. ИИ подстроит монтаж под ваш выбор."
+msgstr "Choose a suitable preset: from dynamic TikTok to cinematic blog. AI will adjust the editing to your choice."
+
+msgid "Автоматические эффекты и звук"
+msgstr "Automatic effects and sound"
+
+msgid "Система добавит подходящую музыку, субтитры и визуальные эффекты, синхронизированные с ритмом видео."
+msgstr "The system will add suitable music, subtitles and visual effects synchronized with the rhythm of the video."
+
+msgid "Готово к публикации!"
+msgstr "Ready for publication!"
+
+msgid "Ваше идеальное видео готово. Скачайте его или мгновенно опубликуйте во все ваши соцсети."
+msgstr "Your perfect video is ready. Download it or instantly publish it to all your social networks."
