@@ -1,18 +1,186 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .support-container {
+        min-height: calc(100vh - 130px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(circle at 10% 20%, rgba(21, 123, 255, 0.05) 0%, transparent 50%),
+            radial-gradient(circle at 90% 80%, rgba(21, 123, 255, 0.1) 0%, transparent 50%);
+    }
+
+    .support-header {
+        padding: 40px 60px;
+    }
+
+    .support-header h1 {
+        font-size: 42px;
+        font-weight: 800;
+        color: #157BFF;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .support-center {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding-bottom: 50px;
+    }
+
+    .support-center h2 {
+        font-size: 48px;
+        font-weight: 800;
+        color: #000;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .support-footer {
+        padding: 40px 60px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .attach-btn {
+        width: 50px;
+        height: 50px;
+        background: #157BFF;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(21, 123, 255, 0.2);
+    }
+
+    .attach-btn:hover {
+        background: #15488B;
+        transform: scale(1.05);
+    }
+
+    .input-wrapper {
+        flex-grow: 1;
+        position: relative;
+    }
+
+    .support-input {
+        width: 100%;
+        height: 50px;
+        border: 2px solid #157BFF;
+        border-radius: 50px;
+        padding: 0 110px 0 25px;
+        font-size: 18px;
+        color: #333;
+        background: white;
+        outline: none;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .send-btn {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        width: 100px;
+        height: 42px;
+        background: #157BFF;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .send-btn:hover {
+        background: #15488B;
+    }
+
+    /* Decorative blurs */
+    .blur-spot {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        filter: blur(120px);
+        z-index: -1;
+        opacity: 0.4;
+    }
+
+    .blur-1 {
+        top: -100px;
+        left: -100px;
+        background: rgba(21, 123, 255, 0.1);
+    }
+
+    .blur-2 {
+        bottom: -100px;
+        right: -100px;
+        background: rgba(21, 123, 255, 0.15);
+    }
+
+    @media (max-width: 768px) {
+        .support-header {
+            padding: 20px;
+        }
+
+        .support-header h1 {
+            font-size: 28px;
+        }
+
+        .support-center h2 {
+            font-size: 32px;
+        }
+
+        .support-footer {
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
+        .support-input {
+            padding-right: 100px;
+        }
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-20 max-w-2xl">
-    <h1 class="text-5xl font-bold text-center mb-12 font-orbitron"><span class="gradient-text">Свяжитесь</span> с нами
-    </h1>
+<div class="support-container">
+    <div class="blur-spot blur-1"></div>
+    <div class="blur-spot blur-2"></div>
 
-    <div class="card">
-        <form method="post">
-            {% csrf_token %}
-            <div class="space-y-4">
-                {{ form.as_p }}
-                <button type="submit" class="btn gradient-bg text-white w-full">Отправить</button>
-            </div>
-        </form>
+    <div class="support-header">
+        <h1>Служба поддержки</h1>
     </div>
+
+    <div class="support-center">
+        <h2>Чем я могу помочь?</h2>
+    </div>
+
+    <form method="post" class="support-footer">
+        {% csrf_token %}
+        <div class="attach-btn">
+            <i class="fa-solid fa-file-circle-plus"></i>
+        </div>
+        <div class="input-wrapper">
+            <input type="text" name="message" class="support-input" placeholder="Написать сообщение" required>
+            <button type="submit" class="send-btn">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </form>
 </div>
 {% endblock %}
