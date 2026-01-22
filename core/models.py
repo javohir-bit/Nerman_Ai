@@ -62,18 +62,24 @@ class Subscription(models.Model):
     """Модель подписки пользователя"""
     
     class Plan(models.TextChoices):
-        FREE = 'free', 'Free'
-        PRO = 'pro', 'Pro'
-        ENTERPRISE = 'enterprise', 'Enterprise'
+        FREEMIUM = 'freemium', 'Freemium'
+        MEDIUM = 'medium', 'Medium'
+        PREMIUM = 'premium', 'Premium'
+    
+    class BillingPeriod(models.TextChoices):
+        MONTHLY = 'monthly', 'Monthly'
+        YEARLY = 'yearly', 'Yearly'
     
     class Status(models.TextChoices):
         ACTIVE = 'active', 'Active'
         CANCELLED = 'cancelled', 'Cancelled'
         EXPIRED = 'expired', 'Expired'
+        TRIAL = 'trial', 'Trial'
     
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='subscription')
-    plan = models.CharField(max_length=20, choices=Plan.choices, default=Plan.FREE)
-    status = models.CharField(max_length=20, choices=Status.choices, default=Status.ACTIVE)
+    plan = models.CharField(max_length=20, choices=Plan.choices, default=Plan.FREEMIUM)
+    billing_period = models.CharField(max_length=20, choices=BillingPeriod.choices, default=BillingPeriod.MONTHLY)
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.TRIAL)
     start_date = models.DateTimeField(default=timezone.now)
     end_date = models.DateTimeField(null=True, blank=True)
     
@@ -83,9 +89,27 @@ class Subscription(models.Model):
     @property
     def features(self):
         features_map = {
-            'free': ['Basic AI Tasks', '1000 tokens/month', 'Email support'],
-            'pro': ['All AI features', '50,000 tokens/month', 'Priority support', 'API access'],
-            'enterprise': ['All Pro features', 'Unlimited tokens', 'Dedicated support', 'Custom integrations']
+            'medium': [
+                'Создание ПРОСТОГО текста',
+                'До 50 Запросов в месяц',
+                'Создание 10 Запросов для картинки',
+                'Без рекламных роликов',
+                'Быстрая Обработка Генерации',
+                'Стиль редактирования'
+            ],
+            'freemium': [
+                'Бесплатный пробный период',
+                'Базовые функции AI',
+                'Ручная Дозаправка Кредитом'
+            ],
+            'premium': [
+                'Создание СЛОЖНОГО текста',
+                'НЕОГРАНИЧЕННОЕ КОЛИЧЕСТВО',
+                'До 450 запросов ДЛЯ картинки',
+                'Создание Картинок ролика',
+                'Создание СЛОЖНОГО контента',
+                'Ручная Дозаправка Кредитом'
+            ]
         }
         return features_map.get(self.plan, [])
 

@@ -1,30 +1,298 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Подписка - NERMAN.AI{% endblock %}
+
+{% block extra_css %}
+<style>
+    .pricing-modal {
+        background: linear-gradient(135deg, rgba(55, 55, 65, 0.95) 0%, rgba(45, 45, 55, 0.95) 100%);
+        backdrop-filter: blur(10px);
+        border-radius: 24px;
+        padding: 40px;
+        max-width: 1000px;
+        margin: 60px auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .pricing-title {
+        font-size: 32px;
+        font-weight: 700;
+        text-align: center;
+        color: white;
+        margin-bottom: 40px;
+    }
+
+    .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .pricing-card {
+        background: white;
+        border-radius: 16px;
+        padding: 24px 16px;
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .pricing-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .pricing-card.medium {
+        background: linear-gradient(180deg, #E8F4FF 0%, #FFFFFF 100%);
+    }
+
+    .pricing-card.freemium {
+        background: linear-gradient(180deg, #1A1A2E 0%, #16213E 100%);
+        color: white;
+    }
+
+    .pricing-card.premium {
+        background: linear-gradient(180deg, #E8F4FF 0%, #FFFFFF 100%);
+    }
+
+    .plan-name {
+        font-size: 24px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .pricing-card.medium .plan-name {
+        color: #0066CC;
+    }
+
+    .pricing-card.freemium .plan-name {
+        color: white;
+    }
+
+    .pricing-card.premium .plan-name {
+        color: #0066CC;
+    }
+
+    .features-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 20px 0;
+        min-height: 180px;
+    }
+
+    .features-list li {
+        font-size: 12px;
+        line-height: 1.6;
+        margin-bottom: 8px;
+        padding-left: 20px;
+        position: relative;
+    }
+
+    .features-list li:before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .pricing-card.medium .features-list li:before {
+        color: #0066CC;
+    }
+
+    .pricing-card.freemium .features-list li:before {
+        color: #4A9EFF;
+    }
+
+    .pricing-card.premium .features-list li:before {
+        color: #0066CC;
+    }
+
+    .pricing-toggle {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .pricing-option {
+        flex: 1;
+        background: white;
+        border: 2px solid transparent;
+        border-radius: 12px;
+        padding: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .pricing-card.freemium .pricing-option {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .pricing-option.active {
+        border-color: #0066CC;
+        background: #E8F4FF;
+    }
+
+    .pricing-card.freemium .pricing-option.active {
+        border-color: #4A9EFF;
+        background: rgba(74, 158, 255, 0.2);
+    }
+
+    .option-label {
+        font-size: 11px;
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+
+    .option-price {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 2px;
+    }
+
+    .option-sublabel {
+        font-size: 9px;
+        opacity: 0.7;
+    }
+
+    .discount-badge {
+        background: #FF4444;
+        color: white;
+        font-size: 9px;
+        padding: 4px 8px;
+        border-radius: 12px;
+        display: inline-block;
+        margin-top: 4px;
+        font-weight: 600;
+    }
+
+    .buy-button {
+        width: 100%;
+        background: #0066CC;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .buy-button:hover {
+        background: #0052A3;
+    }
+
+    .pricing-card.freemium .buy-button {
+        background: #4A9EFF;
+    }
+
+    .pricing-card.freemium .buy-button:hover {
+        background: #3A8EEF;
+    }
+
+    @media (max-width: 768px) {
+        .pricing-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .pricing-modal {
+            margin: 20px;
+            padding: 24px;
+        }
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-20">
-    <h1 class="text-5xl font-bold text-center mb-12 font-orbitron">Выберите свой <span
-            class="gradient-text">тариф</span></h1>
+<div class="min-h-screen py-12" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <div class="pricing-modal">
+        <h1 class="pricing-title">Цены Подписок</h1>
 
-    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {% for plan in plans %}
-        <div class="card {% if plan.highlighted %}border-2 border-primary-500 scale-105{% endif %}">
-            <h3 class="text-2xl font-bold mb-2">{{ plan.name }}</h3>
-            <div class="text-4xl font-bold mb-4">{{ plan.price }}</div>
-            <p class="text-slate-500 mb-4">{{ plan.tokens }} tokens/month</p>
-            <ul class="space-y-2 mb-6">
-                {% for feature in plan.features %}
-                <li class="flex items-center gap-2">
-                    <span class="text-primary-400">✓</span>
-                    <span>{{ feature }}</span>
-                </li>
-                {% endfor %}
-            </ul>
-            <a href="{% url 'register' %}"
-                class="btn {% if plan.highlighted %}gradient-bg text-white{% else %}btn-outline{% endif %} w-full text-center">
-                Выбрать
-            </a>
+        <div class="pricing-grid">
+            {% for plan in plans %}
+            <div class="pricing-card {{ plan.style }}" data-plan="{{ plan.id }}">
+                <div class="plan-name">{{ plan.name }}</div>
+
+                <ul class="features-list">
+                    {% for feature in plan.features %}
+                    <li>{{ feature }}</li>
+                    {% endfor %}
+                </ul>
+
+                <div class="pricing-toggle">
+                    <div class="pricing-option active monthly-option"
+                        onclick="togglePricing('{{ plan.id }}', 'monthly')">
+                        <div class="option-label">{{ plan.monthly_label }}</div>
+                        <div class="option-price">
+                            {% if plan.monthly_price == 'Бесплатно' %}
+                            Бесплатно
+                            {% else %}
+                            {{ plan.monthly_price }}$ / МЕС
+                            {% endif %}
+                        </div>
+                        <div class="option-sublabel">{{ plan.monthly_sublabel }}</div>
+                        {% if plan.trial_note and plan.id == 'freemium' %}
+                        <div class="option-sublabel">{{ plan.trial_note }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="pricing-option yearly-option" onclick="togglePricing('{{ plan.id }}', 'yearly')">
+                        <div class="option-label">{{ plan.yearly_label }}</div>
+                        <div class="option-price">
+                            {% if plan.yearly_price == 'Бесплатно' %}
+                            Бесплатно
+                            {% else %}
+                            {{ plan.yearly_price }}$ / ГОД
+                            {% endif %}
+                        </div>
+                        <div class="option-sublabel">{{ plan.yearly_sublabel }}</div>
+                        {% if plan.discount and plan.id != 'freemium' %}
+                        <div class="discount-badge">{{ plan.discount }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <button class="buy-button" onclick="selectPlan('{{ plan.id }}')">
+                    Приобрести Годовой план
+                </button>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
+
+<script>
+    function togglePricing(planId, period) {
+        const card = document.querySelector(`[data-plan="${planId}"]`);
+        const monthlyOption = card.querySelector('.monthly-option');
+        const yearlyOption = card.querySelector('.yearly-option');
+        const button = card.querySelector('.buy-button');
+
+        if (period === 'monthly') {
+            monthlyOption.classList.add('active');
+            yearlyOption.classList.remove('active');
+            button.textContent = 'Приобрести Месячный план';
+        } else {
+            monthlyOption.classList.remove('active');
+            yearlyOption.classList.add('active');
+            button.textContent = 'Приобрести Годовой план';
+        }
+    }
+
+    function selectPlan(planId) {
+        const card = document.querySelector(`[data-plan="${planId}"]`);
+        const isYearly = card.querySelector('.yearly-option').classList.contains('active');
+        const period = isYearly ? 'yearly' : 'monthly';
+
+        // TODO: Redirect to payment page or show payment modal
+        alert(`Выбран план: ${planId} (${period})`);
+        console.log('Selected plan:', planId, 'Period:', period);
+
+        // Redirect to registration or payment page
+        // window.location.href = `/subscribe/${planId}/${period}/`;
+    }
+</script>
 {% endblock %}
