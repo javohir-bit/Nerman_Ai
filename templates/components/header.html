@@ -28,6 +28,13 @@
                         О Нас
                     </a>
 
+                    {% if user.is_authenticated and user.role == 'admin' %}
+                    <a href="{% url 'admin_users' %}"
+                        class="px-5 py-2.5 rounded-full text-sm font-bold transition-all text-slate-900 hover:text-[#157BFF] whitespace-nowrap">
+                        Админ-панель
+                    </a>
+                    {% endif %}
+
                     {% url 'pricing' as pricing_url %}
                     <a href="{{ pricing_url }}"
                         class="px-5 py-2.5 rounded-full text-sm font-bold transition-all whitespace-nowrap {% if request.path == pricing_url %}bg-gradient-to-r from-[#157BFF] to-[#15488B] text-white shadow-lg{% else %}text-slate-900 hover:text-[#157BFF]{% endif %}">
@@ -123,6 +130,10 @@
             <a href="{% url 'blog' %}" class="block px-4 py-2 bg-black text-white rounded-full">Блог</a>
             <a href="{% url 'contact' %}" class="block px-4 py-2 bg-black text-white rounded-full">Поддержка</a>
             <a href="{% url 'about' %}" class="block px-4 py-2 bg-black text-white rounded-full">О Нас</a>
+            {% if user.is_authenticated and user.role == 'admin' %}
+            <a href="{% url 'admin_users' %}"
+                class="block px-4 py-2 bg-red-600 text-white rounded-full font-bold">Админ-панель</a>
+            {% endif %}
 
             <!-- Mobile Language Switcher -->
             <div class="border-t border-slate-100 my-2 pt-2 pb-1">

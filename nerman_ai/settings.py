@@ -16,6 +16,17 @@ CSRF_TRUSTED_ORIGINS = [
     'https://nerman-ai-kcij.onrender.com'
 ]
 
+# Render.com specific settings
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
