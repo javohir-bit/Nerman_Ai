@@ -1,0 +1,5 @@
+javohirqobiljonov32@gmail.com, True, True
+test_admin@example.com, True, True
+muhamedovjavohir32@gmail.com, True, True
+testusertestuser@nerman.ai, False, False
+javohir@nerman.ai, False, False

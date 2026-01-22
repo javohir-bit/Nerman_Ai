@@ -145,7 +145,7 @@ def send_support_message(request):
         content = data.get('content')
         ticket_id = data.get('ticket_id')
         
-        ticket = get_object_with_404(SupportTicket, id=ticket_id, user=request.user)
+        ticket = get_object_or_404(SupportTicket, id=ticket_id, user=request.user)
         
         # Сохраняем сообщение пользователя
         message = SupportMessage.objects.create(
@@ -188,7 +188,7 @@ def send_support_message(request):
 @login_required
 def get_support_messages(request, ticket_id):
     """AJAX endpoint для получения новых сообщений (polling)"""
-    ticket = get_object_with_404(SupportTicket, id=ticket_id, user=request.user)
+    ticket = get_object_or_404(SupportTicket, id=ticket_id, user=request.user)
     last_id = request.GET.get('last_id', 0)
     
     messages = ticket.messages.filter(id__gt=last_id)
