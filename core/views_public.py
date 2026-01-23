@@ -161,7 +161,7 @@ def send_support_message(request):
         elif "цена" in content.lower() or "price" in content.lower():
             auto_reply_content = "Наши тарифы начинаются от $0. Вы можете посмотреть подробности на странице 'Подписка'."
         else:
-            auto_reply_content = "Ваше сообщение получено. Наши специалисты ответят вам в ближайшее время."
+            auto_reply_content = "Ваше сообщение получено. Наши специалисты ответят вам в ближайшее время.\n\nСаволларга жавоб учун: https://t.me/Nerman_bot"
             
         if auto_reply_content:
             SupportMessage.objects.create(
