@@ -13,7 +13,8 @@ ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
     'https://nerman-ai-test.onrender.com',
     'https://nerman-ai.onrender.com',
-    'https://nerman-ai-kcij.onrender.com'
+    'https://nerman-ai-kcij.onrender.com',
+    'https://*.onrender.com'
 ]
 
 # Render.com specific settings
