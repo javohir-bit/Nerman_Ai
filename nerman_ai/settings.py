@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'rest_framework',
     'core',
-    'support_bot',
 ]
 
 MIDDLEWARE = [
@@ -179,12 +178,3 @@ if AI_API_TYPE not in ['openai', 'gemini']:
     logger.warning(f"⚠ Invalid AI_API_TYPE: {AI_API_TYPE}. Defaulting to '{default_type}'.")
     AI_API_TYPE = default_type
 
-# ============================================
-# Telegram Bot Configuration
-# ============================================
-BOT_TOKEN = config('BOT_TOKEN', default=None)
-
-if BOT_TOKEN:
-    logger.info("✓ BOT_TOKEN is configured")
-else:
-    logger.warning("⚠ BOT_TOKEN is not set! Telegram support bot will not work.")
