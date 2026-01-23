@@ -84,9 +84,10 @@ WSGI_APPLICATION = 'nerman_ai.wsgi.application'
 
 DATABASE_URL = config('DATABASE_URL', default=None)
 
-if DATABASE_URL:
+# Only use DATABASE_URL if it's actually set and not empty
+if DATABASE_URL and DATABASE_URL.strip():
     DATABASES = {
-        'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
+        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
     }
 else:
     DATABASES = {
