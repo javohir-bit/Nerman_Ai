@@ -7,6 +7,7 @@ from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
+    path('', include('support_bot.urls')),
 ]
 
 urlpatterns += i18n_patterns(
