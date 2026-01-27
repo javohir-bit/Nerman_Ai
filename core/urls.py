@@ -24,6 +24,7 @@ urlpatterns = [
     path('dashboard/', views_dashboard.dashboard, name='dashboard'),
     path('dashboard/profile/', views_dashboard.profile_view, name='profile'),
     path('dashboard/subscription/', views_dashboard.subscription_view, name='subscription'),
+    path('dashboard/subscription/upgrade/', views_dashboard.upgrade_plan, name='upgrade_plan'),
     path('dashboard/history/', views_dashboard.history_view, name='history'),
     path('dashboard/integrations/', views_dashboard.integrations_view, name='integrations'),
     path('dashboard/billing/', views_dashboard.billing_view, name='billing'),

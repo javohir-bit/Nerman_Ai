@@ -36,11 +36,83 @@ def profile_view(request):
 def subscription_view(request):
     """Управление подпиской"""
     plans = [
-        {'name': 'Free', 'price': '0', 'tokens': '1,000'},
-        {'name': 'Pro', 'price': '$29', 'tokens': '50,000'},
-        {'name': 'Enterprise', 'price': 'Custom', 'tokens': 'Unlimited'}
+        {
+            'id': 'free',
+            'name': 'Free', 
+            'price': '0', 
+            'period': '/month',
+            'tokens': '1,000 tokens/month',
+            'features': [
+                'Basic AI Tasks',
+                '1,000 tokens/month',
+                'Email support'
+            ],
+            'is_current': request.user.subscription.plan == 'free',
+            'btn_text': 'Current Plan' if request.user.subscription.plan == 'free' else 'Select'
+        },
+        {
+            'id': 'pro',
+            'name': 'Pro', 
+            'price': '$29', 
+            'period': '/month',
+            'tokens': '50,000 tokens/month',
+            'features': [
+                'All AI features',
+                '50,000 tokens/month',
+                'Priority support',
+                'API access'
+            ],
+            'is_current': request.user.subscription.plan == 'pro',
+            'btn_text': 'Current Plan' if request.user.subscription.plan == 'pro' else 'Select',
+            'highlight': True
+        },
+        {
+            'id': 'enterprise',
+            'name': 'Enterprise', 
+            'price': 'Custom', 
+            'period': '',
+            'tokens': 'Unlimited tokens/month',
+            'features': [
+                'All Pro features',
+                'Unlimited tokens',
+                'Dedicated support',
+                'Custom integrations'
+            ],
+            'is_current': request.user.subscription.plan == 'enterprise',
+            'btn_text': 'Contact Sales'
+        }
     ]
     return render(request, 'dashboard/subscription.html', {'plans': plans})
+
+
+@login_required
+@require_POST
+def upgrade_plan(request):
+    """Обновление плана подписки"""
+    plan_id = request.POST.get('plan_id')
+    
+    if plan_id == 'enterprise':
+        return redirect('contact')
+        
+    if plan_id in ['free', 'pro']:
+        # В реальном приложении здесь была бы интеграция с Stripe
+        # Сейчас мы просто эмулируем успешную оплату/смену плана
+        
+        subscription = request.user.subscription
+        subscription.plan = plan_id
+        
+        # Обновляем лимиты токенов при смене плана
+        if plan_id == 'pro':
+            # Добавляем токены если их меньше лимита
+            if request.user.tokens < 50000:
+                request.user.tokens = 50000
+                request.user.save()
+        
+        subscription.save()
+        
+        messages.success(request, f'Plan successfully upgraded to {plan_id.title()}!')
+        
+    return redirect('subscription')
 
 
 @login_required
