@@ -21,11 +21,11 @@
                     </a>
                 </div>
             </div>
-            <div class="relative flex justify-center items-end">
+            <div class="relative flex justify-center items-end overflow-hidden">
                 <img src="{% static 'img/hero_phone_mrbeast_small.png' %}" alt="App Dashboard Small"
-                    class="h-[400px] w-auto object-contain relative z-30 md:-mr-24 mb-4 drop-shadow-xl transform -rotate-3 hover:scale-105 transition-all duration-300">
+                    class="h-[300px] md:h-[400px] w-auto max-w-[50%] md:max-w-full object-contain relative z-30 md:-mr-24 mb-4 drop-shadow-xl transform -rotate-3 hover:scale-105 transition-all duration-300">
                 <img src="{% static 'img/hero_phone_mrbeast_new.png' %}" alt="App Dashboard"
-                    class="h-[500px] w-auto object-contain relative z-20 drop-shadow-2xl">
+                    class="h-[400px] md:h-[500px] w-auto max-w-[80%] md:max-w-full object-contain relative z-20 drop-shadow-2xl">
             </div>
         </div>
     </div>
@@ -39,54 +39,54 @@
     <!-- Marquee Container with "group" for hover effects -->
     <div class="relative w-full overflow-hidden group">
         <!-- Scrolling Wrapper -->
-        <div class="flex w-[200%] animate-marquee group-hover:[animation-play-state:paused]">
+        <div class="flex animate-marquee group-hover:[animation-play-state:paused]">
 
             <!-- Logo Set 1 -->
-            <div class="flex items-center justify-around w-1/2 px-4 gap-4 md:gap-8">
+            <div class="flex items-center w-full px-4 gap-12 md:gap-20">
                 <img src="{% static 'img/logos/google.png' %}" alt="Google"
                     class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
-                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer shrink-0">
 
                 <img src="{% static 'img/logos/microsoft.png' %}" alt="Microsoft"
                     class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
-                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer shrink-0">
 
                 <img src="{% static 'img/logos/spotify.png' %}" alt="Spotify"
                     class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
-                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer shrink-0">
 
                 <!-- Placeholders for failed downloads -->
                 <img src="{% static 'img/logos/tesla.png' %}" alt="Tesla"
                     class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
-                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer shrink-0">
 
                 <img src="{% static 'img/logos/apple.png' %}" alt="Apple"
                     class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
-                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer shrink-0">
             </div>
 
             <!-- Logo Set 2 (Duplicate for loop) -->
-            <div class="flex items-center justify-around w-1/2 px-4 gap-4 md:gap-8">
+            <div class="flex items-center w-full px-4 gap-12 md:gap-20">
                 <img src="{% static 'img/logos/google.png' %}" alt="Google"
                     class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
-                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer shrink-0">
 
                 <img src="{% static 'img/logos/microsoft.png' %}" alt="Microsoft"
                     class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
-                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer shrink-0">
 
                 <img src="{% static 'img/logos/spotify.png' %}" alt="Spotify"
                     class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
-                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer shrink-0">
 
                 <!-- Placeholders for failed downloads -->
                 <img src="{% static 'img/logos/tesla.png' %}" alt="Tesla"
                     class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
-                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer shrink-0">
 
                 <img src="{% static 'img/logos/apple.png' %}" alt="Apple"
                     class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 transition-all duration-300 
-                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer">
+                            group-hover:opacity-30 hover:!opacity-100 hover:!grayscale-0 hover:scale-105 cursor-pointer shrink-0">
             </div>
         </div>
     </div>
@@ -97,7 +97,7 @@
             }
 
             100% {
-                transform: translateX(-50%);
+                transform: translateX(-100%);
             }
         }
 
