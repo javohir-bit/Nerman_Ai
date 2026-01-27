@@ -126,8 +126,6 @@
                 class="block px-4 py-2 bg-black text-white rounded-full">Дом</a>
             <a href="{% url 'product' %}" class="block px-4 py-2 bg-black text-white rounded-full">О Продукте</a>
             <a href="{% url 'pricing' %}" class="block px-4 py-2 bg-black text-white rounded-full">Подписка</a>
-            <a href="{% url 'faq' %}" class="block px-4 py-2 bg-black text-white rounded-full">FAQ</a>
-            <a href="{% url 'blog' %}" class="block px-4 py-2 bg-black text-white rounded-full">Блог</a>
             <a href="{% url 'contact' %}" class="block px-4 py-2 bg-black text-white rounded-full">Поддержка</a>
             <a href="{% url 'about' %}" class="block px-4 py-2 bg-black text-white rounded-full">О Нас</a>
             {% if user.is_authenticated and user.role == 'admin' %}
